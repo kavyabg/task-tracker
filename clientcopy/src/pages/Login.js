@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoginForm } from '../forms/useLoginForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,14 +7,17 @@ export default function Login() {
   const { handleSubmit, loading, status } = useLoginForm();
   const navigate = useNavigate();
 
-const onSubmit = async (e) => {
-  e.preventDefault();
-  const result = await handleSubmit(formData);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await handleSubmit(formData);
+  };
 
-  if (result?.token) {
-    navigate('/dashboard'); // 👈 redirect after login
-  }
-};
+  // ✅ Redirect on successful login
+  useEffect(() => {
+    if (status.success && localStorage.getItem('token')) {
+      navigate('/dashboard');
+    }
+  }, [status, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center p-4">

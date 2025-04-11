@@ -5,7 +5,7 @@ export const useLoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ success: null, message: '' });
 
-  const handleSubmit = async (formData) => {
+  const handleSubmit = async (formData, onSuccess) => {
     setLoading(true);
     setStatus({ success: null, message: '' });
 
@@ -13,6 +13,7 @@ export const useLoginForm = () => {
       const result = await loginUser(formData.username, formData.password);
       localStorage.setItem('token', result.token);
       setStatus({ success: true, message: 'Logged in successfully!' });
+      if (onSuccess) onSuccess(); // ✅ trigger redirect from here
       return result;
     } catch (error) {
       setStatus({
@@ -26,3 +27,4 @@ export const useLoginForm = () => {
 
   return { handleSubmit, loading, status };
 };
+
