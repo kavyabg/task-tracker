@@ -13,7 +13,7 @@ export const useLoginForm = () => {
       const result = await loginUser(formData.username, formData.password);
       localStorage.setItem('token', result.token);
       setStatus({ success: true, message: 'Logged in successfully!' });
-      if (onSuccess) onSuccess(); // ✅ trigger redirect from here
+      if (onSuccess) onSuccess(); 
       return result;
     } catch (error) {
       setStatus({
