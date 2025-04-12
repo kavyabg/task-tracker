@@ -37,6 +37,8 @@ A full-stack task management application built with **React**, **Node.js**, **Mo
 
 ---
 
+![alt text](image.png)
+
 ## 🚀 Getting Started
 
 ### 1. Clone the Repo
